@@ -26,3 +26,9 @@ At first i assumed that signals Voltage would be about 14 V as this is the volta
 In my microcontroller code i use the pulseIn function to read how many microseconds pulse is high, then also to read microsecons pulse is low an adding them both together for finding pulse hig-low lenght. Total lenght of pulse is then used to calculate rpm. The inteferens has some ripples that are pulling the pulse to LOW and this is then ofcorse messing with my code calculations.  
 I´m using an Wemos D1 mini board for this project cause i suspect that in the future i want an mesh network of these boards in my boat for controlling several stuff. This board has as i found from 2,6 to 3.3 Voltage tolerance for input signal, so voltage dividor has to be pretty accurate. There is an while since i´we used and build filters for signals so my probably rubbish attemdt to passive filter the signal with an condensator wasn´t any good. Result was good signal at low rpm (from 750 to about 1000) but higher rpm also means higher frequence of puls and voltage dropped therfore below 2,6 and no signals got registred by the card. I´m sure there is an good way to "polish" the signal so this issue dissapears, but my way around it was some coding that specify an allowance of lenght of pulse High & Low, and this seems to work pretty good. If U got an drawing of an filter thet would do an good job I´m interested :-).
 
+## Tachometerread.ino
+
+Tachometerread.ino contains just the code for reading tach signal and outputs rpm on serial. 
+
+## ATT: This dokument is not finish....
+
