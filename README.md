@@ -18,4 +18,4 @@ I thougt of mounting an switch & relay, but I´we allways ment that anything wor
 
 Searching throu manuals for generator and tachometer i found this table:
 
-![Table of VP engines](https://github.com/Nesse1/images/raw/main/VolvoTachDiagram.png)
+![Table of VP engines](https://github.com/Nesse1/images/raw/main/TachometerTable.png)
