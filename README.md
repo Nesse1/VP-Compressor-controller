@@ -16,7 +16,7 @@ I thougt of mounting an switch & relay, but I´we allways ment that anything wor
 
 ## First we have to look at the signal I want to read:
 
-Searching throu manuals for generator and tachometer i found this table:
+Searching throu manuals for generator and tachometer i found this table in an .pdf installation guide:
 
 ![Table of VP engines](https://github.com/Nesse1/images/raw/main/TachometerTable.bmp)
 
