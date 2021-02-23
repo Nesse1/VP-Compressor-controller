@@ -1,5 +1,5 @@
-# Arduino-Tachometer-Read
-For reading tach signal from generator with arduino
+# Volvo Penta Compressor Controller
+For reading tach signal from generator with microcontroller and with this set status on/off for compressor
 
 Why i started this project:
 
@@ -8,12 +8,12 @@ When im lowering speed/rpm and are slowing down they also activate from 2400 to 
 
 The reason for that i dont want the compressors to be active in these situations: 
 
-1 - Repeatly activation/deactivation of comressors means unnessesary wearing of the clutch.
-
-2 - Cruising with compressor active means an hi loading pressure af air to engines wich is unnessesary wear of enginge.
-
-3 - Noise
-
-Compressors activates by an electical signal, so there is an commond solutions among boatowners to mount an switch and relay to isolate this signal so they can run engines without comressors active. I´we eaven heard that Volvo recomends this, but what do I know. 
+  1 - Unnessesery wear - Repeatly activation/deactivation of comressors means unnessesary wearing of the clutch and drive belt. Also cruising with compressor active means an hi loading pressure af air to engines wich is unnessesary wear of enginge.
+  
+  2 - Noise - Compressors activates by an electical signal, so there is an commond solutions among boatowners to mount an switch and relay to isolate this signal so they can run engines without comressors active. I´we eaven heard that Volvo recomends this, but what do I know. 
 I thougt of mounting an switch & relay, but I´we allways ment that anything worth doing is worth overdoing.... 
 
+
+# About the signal I want to read
+
+Searching throu manuals for generator and tachometer i found this table:
