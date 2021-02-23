@@ -14,11 +14,15 @@ The reason for that i dont want the compressors to be active in these situations
 I thougt of mounting an switch & relay, but I´we allways ment that anything worth doing is worth overdoing.... 
 
 
-## First we have to look at the signal I want to read:
+## First I have to look at the signal I want to read:
 
 Searching throu manuals for generator and tachometer i found this table in an .pdf installation guide:
 
 ![Table of VP engines](https://github.com/Nesse1/images/raw/main/TachometerTable.bmp)
 
-Following the coloumn for Marine Engines i found my engine (31-43) and the conversion factor of 14,7. So the signal from generators face W should therefor be 14,7 "triggers" per engine revolution.
+Following the coloumn for Marine Engines i found my engine (31-43) and the conversion factor of 14,7. So then I know that the signal from generators face W should be 14,7 "triggers" per engine revolution.
+### Some issues:
+At first i assumed that signals Voltage would be about 14 V as this is the voltage usually delivered from generators, but after playing around with the code and an voltage dividor and just getting strange rpm readings, i found that connecting an ocilloscope was nessesary. This reviled that there is an more or less stabile 12 Voltage signal and i had to change resistors in my voltage devidor. Further more this signal has some inteferens.
+In my microcontroller code i use the pulseIn function to read how many microseconds pulse is high, then also to read microsecons pulse is low an adding them both together for finding pulse hig-low lenght. Total lenght of pulse is then used to calculate rpm. The inteferens has some ripples that are pulling the pulse to LOW and this is then ofcorse messing with my code calculations.  
+I´m using an Wemos D1 mini board for this project cause i suspect that in the future i want an mesh network of these boards in my boat for controlling several stuff. This board has as i found from 2,6 to 3.3 Voltage tolerance for input signal. There is an while since i´we used and build filters for signals so my probably rubbish attemdt to filter signal with an condensator wasn´t any good. Result was good signal at low rpm (from 750 to about 1000) but higher rpm also means higher frequence of puls and voltage dropped below 2,6 and therfore no signals got registred by the card. I´m sure there is an good way to "polish" the signal so this issue dissapears, but my way around it was some coding that specify an allowance of lenght of pulse High & Low. If U got an drawing of an filter thet would do an good job i´m interested :-).
 
