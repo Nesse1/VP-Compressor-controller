@@ -17,3 +17,6 @@ I thougt of mounting an switch & relay, but I´we allways ment that anything wor
 ## About the signal I want to read:
 
 Searching throu manuals for generator and tachometer i found this table:
+
+![Table of VP engines](https://nesse1.github.com/Images/Volvo_tach_diagram.jpg)
+
