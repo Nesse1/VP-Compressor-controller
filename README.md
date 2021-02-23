@@ -47,6 +47,12 @@ How many microseconds from start to end of puls (HIGH & LOW):
 ### Some issues:
 At first i assumed that signals Voltage would be about 14 V as this is the voltage usually delivered from generators, but after playing around with the code and an voltage dividor and just getting strange rpm readings, i found that connecting an ocilloscope was nessesary. This reviled that there is an more or less stabile 12 Voltage signal and i had to change resistors in my voltage devidor. Further more this signal has some inteferens.
 In my microcontroller code i use the pulseIn function to read how many microseconds pulse is high, then also to read microsecons pulse is low an adding them both together for finding pulse hig-low lenght. Total lenght of pulse is then used to calculate rpm. The inteferens has some ripples that are pulling the pulse to LOW and this is then ofcorse messing with my code calculations.  
+I don´t hawe the actual readings, but to give U an idea they look something like this:  
+![Example of pulse noice](https://github.com/Nesse1/images/raw/main/Examplenoice.png)
+
+Example shows an good puls at 750 rpm to the left and a bad pulse to the right. With calculations in code result will show 750 rpm for the first pulse, but the second pulse with one ripple in it will deliver an LOW reading mid pulse. 
+
+
 I´m using an Wemos D1 mini board for this project cause i suspect that in the future i want an mesh network of these boards in my boat for controlling several stuff. This board has as i found from 2,6 to 3.3 Voltage tolerance for input signal, so voltage dividor has to be pretty accurate. There is an while since i´we used and build filters for signals so my probably rubbish attemdt to passive filter the signal with an condensator wasn´t any good. Result was good signal at low rpm (from 750 to about 1000) but higher rpm also means higher frequence of puls and voltage dropped therfore below 2,6 and no signals got registred by the card. I´m sure there is an good way to "polish" the signal so this issue dissapears, but my way around it was some coding that specify an allowance of lenght of pulse High & Low, and this seems to work pretty good. If U got an drawing of an filter that would do an good job I´m interested :-).
 
 ## Tachometerread.ino
