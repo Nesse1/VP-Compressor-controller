@@ -27,21 +27,21 @@ I´m building the code using the command "pulseIn" wich returns how many microse
 
 How does the range of pulses/min from my engine look:
 
-  Number of pulses/min at idle or 750/rpm:             750 * 14,7 = 11025 pulses/min at  750 rpm
-  Number of pulses/min at mid thrittle or 2500/rpm    2500 * 14,7 = 36750 pulses/min at 2500 rpm
-  Number of pulses/min at full throttle or 3900/rpm:  3900 * 14,7 = 57330 pulses/min at 3900 rpm
+  Number of pulses/min at idle or 750/rpm:             750 * 14,7 = 11025 pulses/min at  750 rpm  
+  Number of pulses/min at mid thrittle or 2500/rpm    2500 * 14,7 = 36750 pulses/min at 2500 rpm  
+  Number of pulses/min at full throttle or 3900/rpm:  3900 * 14,7 = 57330 pulses/min at 3900 rpm  
 
 How many pulses/second pr engine shaft revolution:
 
-  Number of pulses/second at idle or 750/rpm:           11025 / 60 = 183,75 Hz or pulses/sec
-  Number of pulses/second at mid thrittle or 2500/rpm   36750 / 60 = 612,5 Hz or pulses/sec
-  Number of pulses/second at full throttle or 3900/rpm: 57330 / 60 = 955,5 Hz or pulses/sec
+  Number of pulses/second at idle or 750/rpm:           11025 / 60 = 183,75 Hz or pulses/sec  
+  Number of pulses/second at mid thrittle or 2500/rpm   36750 / 60 = 612,5 Hz or pulses/sec  
+  Number of pulses/second at full throttle or 3900/rpm: 57330 / 60 = 955,5 Hz or pulses/sec  
   
 How many microseconds from start to end of puls (HIGH & LOW):
   
-   Length puls at idle or 750/rpm:                       1000000 / 183,75 = 5442 micros
-  Length puls at mid throttle or 2500/rpm:              1000000 / 612,5  = 1633 micros
-  Lenght puls at full throttle or 3900/rpm:             1000000 / 955,5  = 1047 micros
+   Length puls at idle or 750/rpm:                       1000000 / 183,75 = 5442 micros  
+  Length puls at mid throttle or 2500/rpm:              1000000 / 612,5  = 1633 micros  
+  Lenght puls at full throttle or 3900/rpm:             1000000 / 955,5  = 1047 micros  
   
 
 ### Some issues:
