@@ -14,8 +14,11 @@ The reason for that i dont want the compressors to be active in these situations
 I thougt of mounting an switch & relay, but I´we allways ment that anything worth doing is worth overdoing.... 
 
 
-## About the signal I want to read:
+## First we have to look at the signal I want to read:
 
 Searching throu manuals for generator and tachometer i found this table:
 
-![Table of VP engines](https://github.com/Nesse1/images/raw/main/TachometerTable.png)
+![Table of VP engines](https://github.com/Nesse1/images/raw/main/TachometerTable.bmp)
+
+Following the coloumn for Marine Engines i found my engine (31-43) and the conversion factor of 14,7. So the signal from generators face W should therefor be 14,7 "triggers" per engine revolution.
+
