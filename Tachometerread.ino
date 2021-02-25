@@ -30,6 +30,7 @@
 //For smoother rpm values
 const int numReadings = 200;    // How many pulses u calculate average from, i fond that 200 still updates fast enough
 
+//Array for reading average of pulses
 int readings[numReadings];    
 int thisReading = 0;
 int readIndex = 0;
