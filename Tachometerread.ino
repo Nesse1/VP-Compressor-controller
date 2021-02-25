@@ -2,6 +2,7 @@
 ****** Volvo Penta KAD/KAMD 43 tachometer digital read *****
   
   This is an solution for digital reading of engines rpm where there is an pulsed signal delivered to tachometer. 
+  For Readme file and similar codes go to https://github.com/Nesse1/VP-Compressor-controller
 
   Tachometer signal/puls is delivered from the generators fase W.
   Signal is 12 V so voltage devider is used.
