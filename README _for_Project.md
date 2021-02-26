@@ -50,14 +50,48 @@ In my microcontroller code i use the pulseIn function to read how many microseco
 I don´t hawe the actual readings, but to give U an idea they look something like this:  
 ![Example of pulse noice](https://github.com/Nesse1/images/raw/main/Examplenoice.png)
 
-Example shows an good puls at 750 rpm to the left and a bad pulse to the right. With calculations in code result will show 750 rpm for the first pulse, but the second pulse with one ripple in it will deliver an LOW reading mid pulse. 
+Example shows an good puls at 750 rpm to the left and a bad pulse to the right. With calculations in code result will show 750 rpm for the first pulse, but the second pulse with one ripple in it will deliver an LOW reading mid pulse. "Bad" pulses has ofcource often several ripples, this is just an example. 
 
 
 I´m using an Wemos D1 mini board for this project cause i suspect that in the future i want an mesh network of these boards in my boat for controlling several stuff. This board has as i found from 2,6 to 3.3 Voltage tolerance for input signal, so voltage dividor has to be pretty accurate. There is an while since i´we used and build filters for signals so my probably rubbish attemdt to passive filter the signal with an condensator wasn´t any good. Result was good signal at low rpm (from 750 to about 1000) but higher rpm also means higher frequence of puls and voltage dropped therfore below 2,6 and no signals got registred by the card. I´m sure there is an good way to "polish" the signal so this issue dissapears, but my way around it was some coding that specify an allowance of lenght of pulse High & Low, and this seems to work pretty good. If U got an drawing of an filter that would do an good job I´m interested :-).
+The solution for this to work without filtering of freq was to alter the code so it´s only uses pulses that are within normal range of engine.
+The pulse reading in code happens using microsecons, ore 1/1000000 second if U will. This happends fast, so the prosess has to be slowed down before an output. I´m using an Array to get an pulse lenght average of rpm readings, and furter using an Array again to get an rpm average for Status updates. This slows the prosess down and helps to get an smoother and more correct output.
 
 ## Tachometerread.ino
 
-Tachometerread.ino contains just the code for reading tach signal and outputs rpm on serial. 
+Tachometerread.ino contains just the code for reading tach signal and outputs rpm on serial, i added this as an tach read only with thoughts that this could be the interesting part fore some users...
+
+About Code, I´m focusing on the parts U might want to change:
+
+Number of readings for pulse average for smoother rpm reading:
+```
+
+const int numReadings = 200;    // How many pulses u calculate average from, i fond that 200 still updates fast enough
+
+```
+
+How many pulses should you calculate average from. Higher number gives smooth readings/slower updates of rpm and lower number gives an more "jumping" reading but faster updates. One puls duration is at most (for my engine) 5442 micros, wich means that slowest pulse rate is 183,75 pulses in second (if all pulses are good and without ripples) so 200 pulses isn´t as much as it seems.
+
+
+Input Pin:
+```
+
+int tachoinputPin = 5;          // Specify pin for input signal from generator
+
+```
+
+Specify pin for tachometer signal, this is an digital pin..
+
+
+
+Values U must change according to your engine:
+```
+
+int pulsesPerRev = 147;         // 14.7 * 10 (so we include desimal after dot) - Factor for calculating, number of pulses from generator pr engine revolution 
+int correctingRev = 20;         // For eventual correction of output rpm, i found that 20 (2.0%) gives me more acurate readings according to tachometer in boat.
+
+```
+PulsesPerRev is where U specify how many pulses You´r generator is delivering per revolution. As U can see U have to multiply
 
 ### ATT: This dokument is not finish....
 
