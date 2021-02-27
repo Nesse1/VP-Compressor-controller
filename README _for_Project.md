@@ -83,7 +83,7 @@ int tachoinputPin = 5;          // Specify pin for input signal from generator
 
 ```
 
-Specify pin for tachometer signal, this is an digital pin.
+Specify digital pin for where you connect the positive signal wire from tachometer signal, negative signal wire connects to ground. If you dont´t have negative signal wire i guess you will have to connect microcontroller 5V negative to engine 12 V negative.
 
 
 
