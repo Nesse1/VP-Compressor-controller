@@ -3,7 +3,7 @@ For reading tach signal from generator with microcontroller and with this set st
 
 ## Why I started this project:
 
-My Sealine F37 cabin cruiser has two Volvo Penta KAMD/KAD 43 engines with turbo intercoolers & compressor. Compressors primary use is for boat to easier reach/pass planning threshold. The compressor activates when rpm is between 1600 & 2400 rpm, and this is not always a good thing.
+My Sealine F37 cabin cruiser has two Volvo Penta KAMD/KAD 43 engines with turbo intercoolers & compressor. Compressors primary use is for boat to easier reach/pass planning threshold. The compressor activates electronically when rpm is between 1600 & 2400 rpm, and this is not always a good thing.
 When I am lowering speed/rpm and are slowing down they also activate from 2400 to 1600 rpm, this is not necessary. Also, if I want to cruise at a lower speed where rpm is between 1600-2400rpm I don’t want them to be active.
 
 The reason for that I do not want the compressors to be active in these situations: 
