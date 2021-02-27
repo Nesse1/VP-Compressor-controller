@@ -6,7 +6,7 @@ For reading tach signal from generator with microcontroller and with this set st
 My Sealine F37 cabin cruiser has two Volvo Penta KAMD/KAD 43 engines with turbo intercoolers & compressor. Compressors primary use is for boat to easier reach/pass planning threshold. The compressor activates electronically when rpm is between 1600 & 2400 rpm, and this is not always a good thing.
 When I am lowering speed/rpm and are slowing down they also activate from 2400 to 1600 rpm, this is not necessary. Also, if I want to cruise at a lower speed where rpm is between 1600-2400rpm I don’t want them to be active.
 
-The reason for that I do not want the compressors to be active in these situations: 
+The reason for why I do not want the compressors to be active in these situations: 
 
   1 - Unnecessary wear - Repeating activation/deactivation of compressors means unnecessary wearing of the clutch and drive belt. Also cruising with compressor active means an hi loading pressure of air to engines which is unnecessary wear of engine.
   
