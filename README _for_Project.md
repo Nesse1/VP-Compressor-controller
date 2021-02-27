@@ -10,7 +10,8 @@ The reason for why I do not want the compressors to be active in these situation
 
   1 - Unnecessary wear - Repeating activation/deactivation of compressors means unnecessary wearing of the clutch and drive belt. Also cruising with compressor active means an hi loading pressure of air to engines which is unnecessary wear of engine.
   
-  2 - Noise - Compressors activates by an electrical signal, so there is a common solutions among boatowners to mount an switch and relay to isolate this signal so they can run engines without compressors active. I ‘we have heard that Volvo recommends this, but what do I know. 
+  2 - Noise   
+Compressors activates as mentioned by an electrical signal, so there is a common solutions among boatowners to mount an switch and relay to isolate this signal so they can run engines without compressors active. I ‘we have heard that Volvo recommends this, but what do I know. 
 I thought of mounting an switch & relay, but I ‘we always meant that anything worth doing is worth overdoing.... 
 
 
