@@ -38,7 +38,7 @@ int total = 0;
 int averageRpm = 0; 
 
 //Values that U might have to change:
-int tachoinputPin = 1;          // Specify pin for input signal from generator
+int tachoinputPin = 5;          // Specify pin for input signal from generator
 int pulsesPerRev = 147;         // 14.7 * 10 (so we include desimal after dot) - Factor for calculating, number of pulses from generator pr engine revolution 
 int correctingRev = 20;         // For eventual correction of output rpm, i found that 20 (2.0%) gives me more acurate readings according to tachometer in boat.
 
