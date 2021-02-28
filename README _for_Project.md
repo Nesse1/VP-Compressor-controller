@@ -61,10 +61,10 @@ The pulse reading in code happens using microseconds, ore 1/1000000 second if U 
 
 ## Tachometerread.ino
 
-Tachometerread.ino contains just the code for reading tach signal and outputs rpm on serial, I added this as an tach read only with thoughts that this could be the interesting part for some users...
+Tachometerread.ino contains just the code for reading tach signal and outputs rpm on serial, I added this as an tach read only with thoughts that this could be the interesting part for some users. You will find alot of comments at each section in the code, so here I am just focusing on the parts U might want to change. 
 
 
-### About Code, I´m focusing on the parts U might want to change:
+### Things you might have to change in code:
 
 
 Number of readings for pulse average for smoother rpm reading:
