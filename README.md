@@ -123,7 +123,52 @@ Card is here powered from PC, and also used for reading serial data.
 
 With an reading of rpm from engine it is time to use this for controlling compressor. This code is ofcourse based on and an continue of TachometerRead.ino, therefore I will only comment on the new lines in this code.
 
+### What code does:
 
+In this code I am using rpm readings to calculate en status for the rpm. My goal is to get an status (3) when rpm is increasing, an status (1) when rpm is deacreasing and an status (2) when rpm is stabile over an certan time. With this status I can control an relay to close when I want compressor to be active when we have increasing rpm, and inactive when rpm i stabile or deacreasing.
+
+
+### Things U might want to change in this code:
+
+
+Arary for statusupdate
+
+```
+
+const int numReadingsRpm_Engine1Stat = 100;    // How many rpm u calculate average for statusupdate from
+
+```
+I am using an Array to get an average reading of statusupdates, this to slow down and stabilice updates so staus is less jumping. 
+
+
+
+Status Delay:
+```
+
+const int StatusDelay_Engine1 = 5000;         // Set an delay in millis for status to change, this delay avoids compressor for rapidly turning on/off
+
+
+```
+
+I am setting an delay for status updates, this is also for avoiding status to jump around. This function will check averagestatus and wait 5000 millis (5 seconds), then check averagestatus again before actually changing the rpmEngine_1Status output.
+This will also mean that if I increase throttle from idle to 2000rpm stabile, it will take 5 seconds before compressor is deactivated.
+
+
+Some values U might want to change:
+
+```
+
+int relayoutputPinEngine_1 = 2;            // Specify pin for output signal to relay
+int ledPinGreenEngine_1 = 0;           //Used for debugging and for testing status when connected to engine, defines pin used for led
+int ledPinRedEngine_1 = 4;             //Used for debugging and for testing status when connected to engine, defines pin used for led
+
+```
+I hawe added input pin for relay, red and green led, i guess relay and led output pins are self explaning.  
+
+
+Connections:
+
+![Connections](https://github.com/Nesse1/images/raw/main/TachometerReadConnections.png)
 
 
 ### ATT: This document is not finish....
