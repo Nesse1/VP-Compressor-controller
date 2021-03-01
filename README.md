@@ -168,7 +168,7 @@ I hawe added input pin for relay, red and green led, i guess relay and led outpu
 
 Connections:
 
-![Connections](https://github.com/Nesse1/images/raw/main/TachometerReadConnections.png)
+![Connections](https://github.com/Nesse1/images/raw/main/CompressorControllerConnections.bmp)
 
 
 ### ATT: This document is not finish....
