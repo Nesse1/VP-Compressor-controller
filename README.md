@@ -121,6 +121,8 @@ Card is here powered from PC, and also used for reading serial data.
 
 ## OneEngineCompressorController.ino
 
+With an reading of rpm from engine it is time to use this for controlling compressor. This code is ofcourse based on and an continue of TachometerRead.ino, therefore I will only comment on the new lines in this code.
+
 
 
 
