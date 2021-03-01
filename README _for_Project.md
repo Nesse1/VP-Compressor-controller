@@ -111,6 +111,10 @@ int highestPulseAllowed = 6000; // Highest pulse allowed - At 750 rpm pulse is 5
 I discovered that counting pulses in microseconds like I do in this code will also count all kind of noise. Some of this noise brings the pulse to low several times while pulse is supposed to be high. Therefore, by adding an allowance limit for pulses to be read I manages to filter out most of the bad pulses. Also, since the normal length of pulses is so short that I measure them in microseconds i find that there is plenty of "good" pulses to get the reading fast enough.
 U will have to do some calculations like mine to find your needs for allowance. Notice that I´m setting allowance a bit higher/lower than actual calculations.
 
+Connections:
+
+![Connections](https://github.com/Nesse1/images/raw/main/TachometerReadConnections.bmp)
+
 
 
 ### ATT: This document is not finish....
