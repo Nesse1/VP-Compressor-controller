@@ -113,7 +113,7 @@ U will have to do some calculations like mine to find your needs for allowance. 
 
 Connections:
 
-![Connections](https://github.com/Nesse1/images/raw/main/TachometerReadConnections.bmp)
+![Connections](https://github.com/Nesse1/images/raw/main/TachometerReadConnections.png)
 
 
 
