@@ -166,9 +166,17 @@ int ledPinRedEngine_1 = 4;             //Used for debugging and for testing stat
 I hawe added input pin for relay, red and green led, i guess relay and led output pins are self explaning.  
 
 
+
 Connections:
 
 ![Connections](https://github.com/Nesse1/images/raw/main/CompressorControllerConnections.bmp)
 
+Resistors for voltagedevidor is still the same, R1 = 5.6K and R2 = 2.2K. Resistors R3 & R4 used for led is 220 ohm.
+The compressor is connected to the relay´s "closed" connection so that when power is added to relay it breaks the surcuit for power to compressor.
+I have also added an 5 volt voltage regulator, I didn´t have an 3,3 but this works fine as long as i power the Wemos board using 5V pin...
+
+
+Video where I am testing status updates in boat:
+https://youtu.be/avVuPIPxaBE
 
 ### ATT: This document is not finish....
