@@ -115,6 +115,13 @@ Connections:
 
 ![Connections](https://github.com/Nesse1/images/raw/main/TachometerReadConnections.png)
 
+Microcontroller used is Wemoa D1 mini, but any controller should work. As mentioned, knowing myself I will probably want to send data over mesh network later so i might as well start with a microcontroller like this. In the voltage dividor I am using resistor R1 = 5,6K and R2 = 2,2K. This microcontroller has an tolerance for digital high in from 2,6 to 3,3V. This voltage dividor gives me an signal with high voltage at 3,5-3,6 volt, this is a bit higher than tolerance, but this works well for now without issues, if this later on should be an problem I will have to use an other configuration of resistors.   
+Card is here powered from PC, and also used for reading serial data.
+
+
+## OneEngineCompressorController.ino
+
+
 
 
 ### ATT: This document is not finish....
