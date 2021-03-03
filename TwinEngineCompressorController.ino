@@ -28,14 +28,19 @@
  */
 
 //For smoother rpmEngine_1 values
-const int numReadingsRpm_Engine1 = 200;        // How many pulses u calculate rpm average from, i fond that 200 still updates fast enough
-const int numReadingsRpm_Engine1Stat = 100;    // How many rpm u calculate average for statusupdate from
-const int StatusDelay_Engine1 = 5000;         // Set an delay in millis for status to change, this delay avoids compressor for rapidly turning on/off
+const int numReadingsRpm_Engine1 = 200;       // How many pulses u calculate rpm average from, i fond that 200 still updates fast enough
+const int numReadingsRpm_Engine1Stat = 100;   // How many rpm u calculate average for statusupdate from
+const int StatusDelay_Engine1 = 4000;         // Set an delay in millis for status to change, this delay avoids compressor for rapidly turning on/off
+const int StatusTollerance_Engine_1 = 45;     // Tolerance for how many +/- difference in averageRpm_Engine1Stat before statuschange to accure. Higher number stabilizes Status 2 (rpm stabile) but then it also takes longer time for statuschange when rpm increasing/decreasing.
 
 //For smoother rpmEngine_1 values
-const int numReadingsRpm_Engine2 = 200;        // How many pulses u calculate rpm average from, i fond that 200 still updates fast enough
-const int numReadingsRpm_Engine2Stat = 100;    // How many rpm u calculate average for statusupdate from
-const int StatusDelay_Engine2 = 5000;         // Set an delay in millis for status to change, this delay avoids compressor for rapidly turning on/off
+const int numReadingsRpm_Engine2 = 200;             // How many pulses u calculate rpm average from, i fond that 200 still updates fast enough
+const int numReadingsRpm_Engine2Stat = 100;         // How many rpm u calculate average for statusupdate from
+const int StatusDelay_Engine2 = 4000;               // Set an delay in millis for status to change, this delay avoids compressor for rapidly turning on/off
+const int StatusTollerance_Engine_2 = 45;           // Tolerance for how many +/- difference in averageRpm_Engine2Stat before statuschange to accure. Higher number stabilizes Status 2 (rpm stabile) but then it also takes longer time for statuschange when rpm increasing/decreasing.
+const int CompressorActivateLimitEngine_1 = 2000;   // Status will not change to 3 (increasing rpm)and activate compressor if rpm is over this.
+const int CompressorActivateLimitEngine_2 = 2000;   // Status will not change to 3 (increasing rpm)and activate compressor if rpm is over this.
+
 
 //Array for reading average of pulses for rpmEngine_1
 int readingsRpm_Engine1[numReadingsRpm_Engine1];    
@@ -43,7 +48,6 @@ int thisReadingRpm_Engine1 = 0;
 int readIndexRpm_Engine1 = 0;
 int totalRpm_Engine1 = 0;
 int averageRpm_Engine1 = 0; 
-
 //Array for reading average of pulses for rpmEngine_2
 int readingsRpm_Engine2[numReadingsRpm_Engine2];    
 int thisReadingRpm_Engine2 = 0;
@@ -57,18 +61,14 @@ int thisReadingRpm_Engine1Stat = 0;
 int readIndexRpm_Engine1Stat = 0;
 int totalRpm_Engine1Stat = 0;
 int averageRpm_Engine1Stat = 0; 
-
 //Array for reading average rpmEngine_2 for Status
 int readingsRpm_Engine2Stat[numReadingsRpm_Engine2];    
 int thisReadingRpm_Engine2Stat = 0;
 int readIndexRpm_Engine2Stat = 0;
 int totalRpm_Engine2Stat = 0;
 int averageRpm_Engine2Stat = 0; 
-
-
 // declare rpm Engine 1 Status data holder
 int rpmEngine_1Status = 0;
-
 // declare rpm Engine 2 Status data holder
 int rpmEngine_2Status = 0;
 
@@ -92,7 +92,6 @@ int correctingRevEngine_2 = 20;             // For eventual correction of output
 // Pulse signal from generator Engine 1 is full og ripples, so by setting max/min pulse allowed code will only read relevant and "clean" pulses.
 int lowestPulseAllowedEngine_1 = 900;      // Lowes pulse allowed - At 3900 rpm pulse is 1047 micros, so shorter pulses are most lightly ripples or an uncorrect pulse
 int highestPulseAllowedEngine_1 = 6000;     // Highest pulse allowed - At 750 rpm pulse is 5442 micros, so longer pulses are most lightly ripples or an uncorrect pulse
-
 // Pulse signal from generator Engine 2 is full og ripples, so by setting max/min pulse allowed code will only read relevant and "clean" pulses.
 int lowestPulseAllowedEngine_2 = 900;      // Lowes pulse allowed - At 3900 rpm pulse is 1047 micros, so shorter pulses are most lightly ripples or an uncorrect pulse
 int highestPulseAllowedEngine_2 = 6000;     // Highest pulse allowed - At 750 rpm pulse is 5442 micros, so longer pulses are most lightly ripples or an uncorrect pulse
@@ -279,11 +278,11 @@ rpmEngine_2 = (((1000000 / totalRpmDurationEngine_2) * 60) / pulsesPerRevEngine_
 
 
 // Status for rpmEngine_1 increasing, decreasing or stabil
-if(averageRpm_Engine1 > (averageRpm_Engine1Stat + 25)&((millisEngine_1Stat_1 + StatusDelay_Engine1) <= currentMillis)){                   // If rpmEngine_1 is increasing status is set to 3, there has to be an increase of 25 rpm before status is set to 3
+if(averageRpm_Engine1 > (averageRpm_Engine1Stat + StatusTollerance_Engine_1)&((millisEngine_1Stat_1 + StatusDelay_Engine1) <= currentMillis)&(averageRpm_Engine1 < CompressorActivateLimitEngine_1)){                   // If rpmEngine_1 is increasing status is set to 3, there has to be an increase of rpm before status is set to 3
   rpmEngine_1Status = 3;
   millisEngine_1Stat_3 = millis();
 }
-else if(averageRpm_Engine1 < (averageRpm_Engine1Stat - 25)&((millisEngine_1Stat_3 + StatusDelay_Engine1) <= currentMillis)){               // If rpmEngine_1 is decreasing status is set to 1, there has to be an decrease of 25 rpm before status is set to 1
+else if(averageRpm_Engine1 < (averageRpm_Engine1Stat - StatusTollerance_Engine_1)&((millisEngine_1Stat_3 + StatusDelay_Engine1) <= currentMillis)){               // If rpmEngine_1 is decreasing status is set to 1, there has to be an decrease of rpm before status is set to 1
   rpmEngine_1Status = 1;
   millisEngine_1Stat_1 = millis();
 }
@@ -295,11 +294,11 @@ else{
 }
 
 // Status for rpmEngine_2 increasing, decreasing or stabil
-if(averageRpm_Engine2 > (averageRpm_Engine2Stat + 25)&((millisEngine_2Stat_1 + StatusDelay_Engine2) <= currentMillis)){                   // If rpmEngine_2 is increasing status is set to 3, there has to be an increase of 25 rpm before status is set to 3
+if(averageRpm_Engine2 > (averageRpm_Engine2Stat + StatusTollerance_Engine_2)&((millisEngine_2Stat_1 + StatusDelay_Engine2) <= currentMillis)&(averageRpm_Engine2 < CompressorActivateLimitEngine_2)){                   // If rpmEngine_2 is increasing status is set to 3, there has to be an increase of 25 rpm before status is set to 3
   rpmEngine_2Status = 3;
   millisEngine_2Stat_3 = millis();
 }
-else if(averageRpm_Engine2 < (averageRpm_Engine2Stat - 25)&((millisEngine_2Stat_3 + StatusDelay_Engine2) <= currentMillis)){               // If rpmEngine_2 is decreasing status is set to 1, there has to be an decrease of 25 rpm before status is set to 1
+else if(averageRpm_Engine2 < (averageRpm_Engine2Stat - StatusTollerance_Engine_2)&((millisEngine_2Stat_3 + StatusDelay_Engine2) <= currentMillis)){               // If rpmEngine_2 is decreasing status is set to 1, there has to be an decrease of 25 rpm before status is set to 1
   rpmEngine_2Status = 1;
   millisEngine_2Stat_1 = millis();
 }
