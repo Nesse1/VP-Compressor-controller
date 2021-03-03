@@ -179,4 +179,31 @@ I have also added an 5 volt voltage regulator, I didn´t have an 3,3 but this wo
 Video where I am testing status updates in boat:
 https://youtu.be/avVuPIPxaBE
 
+Using led for testing status is useful for seeing what and when things are happening. At this point it is also useful to play around with some parameters to fully understand what happens: 
+
+```
+//For smoother rpmEngine_1 values
+const int numReadingsRpm_Engine1 = 200;        // How many pulses u calculate rpm average from, i fond that 200 still updates fast enough
+const int numReadingsRpm_Engine1Stat = 100;    // How many rpm u calculate average for statusupdate from
+const int StatusDelay_Engine1 = 5000;         // Set an delay in millis for status to change, this delay avoids compressor for rapidly turning on/off
+
+int correctingRevEngine_1 = 20;             // For eventual correction of output rpm, i found that 20 (2.0%) gives me more acurate readings according to tachometer in boat.
+
+
+// Pulse signal from generator is full og ripples, so by setting max/min pulse allowed code will only read relevant and "clean" pulses.
+int lowestPulseAllowedEngine_1 = 900;      // Lowes pulse allowed - At 3900 rpm pulse is 1047 micros, so shorter pulses are most lightly ripples or an uncorrect pulse
+int highestPulseAllowedEngine_1 = 5800;     // Highest pulse allowed - At 750 rpm pulse is 5442 micros, so longer pulses are most lightly ripples or an uncorrect pulse
+
+```
+
+When you are happy with result, it is time to perform full test:
+
+https://youtu.be/tlZVmXCEPew
+
+After performing full test i found that there is still some adjustments I want to do:
+increasing tolerance for rpm +/- for status since engine changes status when idle and also when Status = 2 (rpm stabile) at 2000 rpm since rpm rises a bit when compressor is disengaging.
+Chsnge some timing issues, I want to try to lower delay for ststus update and and also add to code that compressor does not have to engage if Status = 2 (rpm stabile) and rpm is above 2000. This will avoid compressor to start up just for an second or two.... 
+
+
 ### ATT: This document is not finish....
+i
