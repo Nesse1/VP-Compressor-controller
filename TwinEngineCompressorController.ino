@@ -32,13 +32,13 @@ const int numReadingsRpm_Engine1 = 200;       // How many pulses u calculate rpm
 const int numReadingsRpm_Engine1Stat = 100;   // How many rpm u calculate average for statusupdate from
 const int StatusDelay_Engine1 = 4000;         // Set an delay in millis for status to change, this delay avoids compressor for rapidly turning on/off
 const int StatusTollerance_Engine_1 = 45;     // Tolerance for how many +/- difference in averageRpm_Engine1Stat before statuschange to accure. Higher number stabilizes Status 2 (rpm stabile) but then it also takes longer time for statuschange when rpm increasing/decreasing.
+const int CompressorActivateLimitEngine_1 = 2000;   // Status will not change to 3 (increasing rpm)and activate compressor if rpm is over this.
 
 //For smoother rpmEngine_2 values
 const int numReadingsRpm_Engine2 = 200;             // How many pulses u calculate rpm average from, i fond that 200 still updates fast enough
 const int numReadingsRpm_Engine2Stat = 100;         // How many rpm u calculate average for statusupdate from
 const int StatusDelay_Engine2 = 4000;               // Set an delay in millis for status to change, this delay avoids compressor for rapidly turning on/off
 const int StatusTollerance_Engine_2 = 45;           // Tolerance for how many +/- difference in averageRpm_Engine2Stat before statuschange to accure. Higher number stabilizes Status 2 (rpm stabile) but then it also takes longer time for statuschange when rpm increasing/decreasing.
-const int CompressorActivateLimitEngine_1 = 2000;   // Status will not change to 3 (increasing rpm)and activate compressor if rpm is over this.
 const int CompressorActivateLimitEngine_2 = 2000;   // Status will not change to 3 (increasing rpm)and activate compressor if rpm is over this.
 
 
@@ -236,7 +236,7 @@ rpmEngine_2 = (((1000000 / totalRpmDurationEngine_2) * 60) / pulsesPerRevEngine_
     // ...wrap around to the beginning:
     readIndexRpm_Engine2 = 0;
   }
-  // calculate the averageRpm_Engine1:
+  // calculate the averageRpm_Engine2:
   averageRpm_Engine2 = totalRpm_Engine2 / numReadingsRpm_Engine2;
 
 
@@ -272,7 +272,7 @@ rpmEngine_2 = (((1000000 / totalRpmDurationEngine_2) * 60) / pulsesPerRevEngine_
     // ...wrap around to the beginning:
     readIndexRpm_Engine2Stat = 0;
   }
-  // calculate the averageRpm_Engine1:
+  // calculate the averageRpm_Engine2:
   averageRpm_Engine2Stat = totalRpm_Engine2Stat / numReadingsRpm_Engine2Stat;
 
 
