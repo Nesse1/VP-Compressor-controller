@@ -33,7 +33,7 @@ const int numReadingsRpm_Engine1Stat = 100;   // How many rpm u calculate averag
 const int StatusDelay_Engine1 = 4000;         // Set an delay in millis for status to change, this delay avoids compressor for rapidly turning on/off
 const int StatusTollerance_Engine_1 = 45;     // Tolerance for how many +/- difference in averageRpm_Engine1Stat before statuschange to accure. Higher number stabilizes Status 2 (rpm stabile) but then it also takes longer time for statuschange when rpm increasing/decreasing.
 
-//For smoother rpmEngine_1 values
+//For smoother rpmEngine_2 values
 const int numReadingsRpm_Engine2 = 200;             // How many pulses u calculate rpm average from, i fond that 200 still updates fast enough
 const int numReadingsRpm_Engine2Stat = 100;         // How many rpm u calculate average for statusupdate from
 const int StatusDelay_Engine2 = 4000;               // Set an delay in millis for status to change, this delay avoids compressor for rapidly turning on/off
