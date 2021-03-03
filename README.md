@@ -4,15 +4,15 @@ For reading tach signal from generator with microcontroller and with this set st
 ## Why I started this project:
 
 My Sealine F37 cabin cruiser has two Volvo Penta KAMD/KAD 43 engines with turbo intercoolers & compressor. Compressors primary use is for boat to easier reach/pass planning threshold. The compressor activates electronically when rpm is between 1600 & 2400 rpm, and this is not always a good thing.
-When I am lowering speed/rpm and are slowing down they also activate from 2400 to 1600 rpm, this is not necessary. Also, if I want to cruise at a lower speed where rpm is between 1600-2400rpm I don’t want them to be active.
+When I am lowering speed/rpm and are slowing down they also activate from 2400 to 1600 rpm, this is not necessary. Also, if I want to cruise at a lower speed where rpm is between 1600-2400rpm I do not want them to be active. This is the first code/sketch I have written from scratch, so I guess there is potential for improvement, but it works as intended so I am happy about it.
 
 The reason for why I do not want the compressors to be active in these situations: 
 
   1 - Unnecessary wear - Repeating activation/deactivation of compressors means unnecessary wearing of the clutch and drive belt. Also cruising with compressor active means an hi loading pressure of air to engines which is unnecessary wear of engine.
   
   2 - Noise   
-Compressors activates as mentioned by an electrical signal, so there is a common solutions among boatowners to mount an switch and relay to isolate this signal so they can run engines without compressors active. I ‘we have heard that Volvo recommends this, but what do I know. 
-I thought of mounting an switch & relay, but I ‘we always meant that anything worth doing is worth overdoing.... 
+Compressors activates as mentioned by an electrical signal, so there is a common solution among boatowners to mount a switch and relay to isolate this signal so they can run engines without compressors active. I ‘we have heard that Volvo recommends this, but what do I know. 
+I thought of mounting a switch & relay, but I ‘we always meant that anything worth doing is worth overdoing.... 
 
 
 ## First a look at the signal I want to read:
@@ -55,13 +55,13 @@ I don´t have the actual readings, but to give U an idea they look something lik
 Example shows a good pulse at 750 rpm to the left and a bad pulse to the right. With calculations in code result will show 750 rpm for the first pulse, but the second pulse with one ripple in it will deliver an LOW reading mid pulse. "Bad" pulses have of course often several ripples, this is just an example. 
 
 
-I´m using an Wemos D1 mini board for this project because I suspect that in the future, I want a mesh network of these boards in my boat for controlling several stuffs. This board has as i found from 2,6 to 3.3 Voltage tolerance for input signal, so voltage divider must be pretty accurate. There is a while since I ‘we used and build filters for signals so my probably rubbish attempt to passive filter the signal with a small capacitor wasn´t any good. Result was good signal at low rpm (from 750 to about 1000) but higher rpm also means higher frequency of pulse and voltage dropped therefore below 2,6 and no signals got registered by the card. I´m sure there is a good way to "polish" the signal, so this issue disappears, but my way around it was some coding that specify an allowance of length of pulse High & Low, and this seems to work well. If U got a drawing of a filter that would do an good job I´m interested :-).
+I´m using an Wemos D1 mini board for this project because I suspect that in the future, I want a mesh network of these boards in my boat for controlling several stuffs. This board has as i found from 2,6 to 3.3 Voltage tolerance for input signal, so voltage divider must be pretty accurate. There is a while since I ‘we used and build filters for signals so my probably rubbish attempt to passive filter the signal with a small capacitor wasn´t any good. Result was good signal at low rpm (from 750 to about 1000) but higher rpm also means higher frequency of pulse and voltage dropped therefore below 2,6 and no signals got registered by the card. I´m sure there is a good way to "polish" the signal, so this issue disappears, but my way around it was some coding that specify an allowance of length of pulse High & Low, and this seems to work well. If U got a drawing of a filter that would do a good job I´m interested :-).
 The solution for this to work without filtering of frequency was to alter the code so it´s only uses pulses that are within normal range of engine.
 The pulse reading in code happens using microseconds, ore 1/1000000 second if U will. This happens fast, so the process must be slowed down before an output. I´m using an Array to get a pulse length average of rpm readings, and further using an Array again to get an rpm average for Status updates. This slows the process down and helps to get a smoother and more correct output.
 
 ## Tachometerread.ino
 
-Tachometerread.ino contains just the code for reading tach signal and outputs rpm on serial, I added this as an tach read only with thoughts that this could be the interesting part for some users. You will find alot of comments at each section in the code, so here I am just focusing on the parts U might want to change. 
+Tachometerread.ino contains just the code for reading tach signal and outputs rpm on serial, I added this as a tach read only with thoughts that this could be the interesting part for some users. You will find a lot of comments at each section in the code, so here I am just focusing on the parts U might want to change. 
 
 
 ### Things you might have to change in code:
@@ -74,7 +74,7 @@ const int numReadings = 200;    // How many pulses u calculate average from, I f
 
 ```
 
-How many pulses should you calculate average from. Higher number gives smooth readings/slower updates of rpm and lower number gives a more "jumping" reading but faster updates. One pulse duration is at most (for my engine) 5442 micros, which means that slowest pulse rate is 183,75 pulses in second (if all pulses are good and without ripples) so 200 pulses isn´t as much as it seems.
+How many pulses should you calculate average from? Higher number gives smooth readings/slower updates of rpm and lower number gives a more "jumping" reading but faster updates. One pulse duration is at most (for my engine) 5442 micros, which means that slowest pulse rate is 183,75 pulses in second (if all pulses are good and without ripples) so 200 pulses isn´t as much as it seems.
 
 
 Input Pin:
@@ -84,7 +84,7 @@ int tachoinputPin = 5;          // Specify pin for input signal from generator
 
 ```
 
-Specify digital pin for where you connect the positive signal wire from tachometer signal, negative signal wire connects to ground. If you dont´t have negative signal wire i guess you will have to connect microcontroller 5V negative to engine 12 V negative.
+Specify digital pin for where you connect the positive signal wire from tachometer signal, negative signal wire connects to ground. If you do not have negative signal wire i guess you will have to connect microcontroller 5V negative to engine 12 V negative.
 
 
 
@@ -97,7 +97,7 @@ int correctingRev = 20;         // For eventual correction of output rpm, i foun
 ```
 PulsesPerRev is where U specify how many pulses Your generator is delivering per revolution. As U can see U have to multiply pulses per revolution by 10, this was necessary for code to also consider decimals behind dot.
 
-CorrectingRev is an function added for ability to adjust rpm readings if they don´t mach tachomerter. 20 = 2 % higer value output.
+CorrectingRev is a function added for ability to adjust rpm readings if they don´t match tachometer. 20 = 2 % higher value output.
 
 
 Allowance of pulse:
@@ -115,30 +115,30 @@ Connections:
 
 ![Connections](https://github.com/Nesse1/images/raw/main/TachometerReadConnections.png)
 
-Microcontroller used is Wemoa D1 mini, but any controller should work. As mentioned, knowing myself I will probably want to send data over mesh network later so i might as well start with a microcontroller like this. In the voltage dividor I am using resistor R1 = 5,6K and R2 = 2,2K. This microcontroller has an tolerance for digital high in from 2,6 to 3,3V. This voltage dividor gives me an signal with high voltage at 3,5-3,6 volt, this is a bit higher than tolerance, but this works well for now without issues, if this later on should be an problem I will have to use an other configuration of resistors.   
-Card is here powered from PC, and also used for reading serial data.
+Microcontroller used is Wemoa D1 mini, but any controller should work. As mentioned, knowing myself I will probably want to send data over mesh network later so i might as well start with a microcontroller like this. In the voltage divider I am using resistor R1 = 5,6K and R2 = 2,2K. This microcontroller has a tolerance for digital high in from 2,6 to 3,3V. This voltage divider gives me an signal with high voltage at 3,5-3,6 volt, this is a bit higher than tolerance, but this works well for now without issues, if this later on should be an problem I will have to use another configuration of resistors.   
+Card is here powered from PC and PC is used for reading serial data.
 
 
 ## OneEngineCompressorController.ino
 
-With an reading of rpm from engine it is time to use this for controlling compressor. This code is ofcourse based on and an continue of TachometerRead.ino, therefore I will only comment on the new lines in this code.
+With a reading of rpm from engine it is time to use this for controlling compressor. This code is of course based on and an continue of TachometerRead.ino, therefore I will only comment on the new lines in this code.
 
 ### What code does:
 
-In this code I am using rpm readings to calculate en status for the rpm. My goal is to get an status (3) when rpm is increasing, an status (1) when rpm is deacreasing and an status (2) when rpm is stabile over an certan time. With this status I can control an relay to close when I want compressor to be active when we have increasing rpm, and inactive when rpm i stabile or deacreasing.
+In this code I am using rpm readings to calculate a status for the rpm. My goal is to get a status (3) when rpm is increasing, an status (1) when rpm is decreasing and an status (2) when rpm is stabile over an certain time. With this status I can control a relay to close when I want compressor to be active when we have increasing rpm, and inactive when rpm i stabile or decreasing.
 
 
 ### Things U might want to change in this code:
 
 
-Arary for statusupdate
+Array for statusupdate
 
 ```
 
 const int numReadingsRpm_Engine1Stat = 100;    // How many rpm u calculate average for statusupdate from
 
 ```
-I am using an Array to get an average reading of statusupdates, this to slow down and stabilice updates so staus is less jumping. 
+I am using an Array to get an average reading of statusupdates, this to slow down and stabilize updates so status is less jumping. 
 
 
 
@@ -150,7 +150,7 @@ const int StatusDelay_Engine1 = 5000;         // Set an delay in millis for stat
 
 ```
 
-I am setting an delay for status updates, this is also for avoiding status to jump around. This function will check averagestatus and wait 5000 millis (5 seconds), then check averagestatus again before actually changing the rpmEngine_1Status output.
+I am setting a delay for status updates, this is also for avoiding status to jump around. This function will check averagestatus and wait 5000 millis (5 seconds), then check averagestatus again before changing the rpmEngine_1Status output.
 This will also mean that if I increase throttle from idle to 2000rpm stabile, it will take 5 seconds before compressor is deactivated.
 
 
@@ -163,7 +163,7 @@ int ledPinGreenEngine_1 = 0;           //Used for debugging and for testing stat
 int ledPinRedEngine_1 = 4;             //Used for debugging and for testing status when connected to engine, defines pin used for led
 
 ```
-I hawe added input pin for relay, red and green led, i guess relay and led output pins are self explaning.  
+I have added input pin for relay, red and green led, i guess relay and led output pins are self-explaining.  
 
 
 
@@ -171,9 +171,9 @@ Connections:
 
 ![Connections](https://github.com/Nesse1/images/raw/main/CompressorControllerConnections.bmp)
 
-Resistors for voltagedevidor is still the same, R1 = 5.6K and R2 = 2.2K. Resistors R3 & R4 used for led is 220 ohm.
-The compressor is connected to the relay´s "closed" connection so that when power is added to relay it breaks the surcuit for power to compressor.
-I have also added an 5 volt voltage regulator, I didn´t have an 3,3 but this works fine as long as i power the Wemos board using 5V pin...
+Resistors for voltage divider is still the same, R1 = 5.6K and R2 = 2.2K. Resistors R3 & R4 used for led is 220 ohms.
+The compressor is connected to the relay´s "closed" connection so that when power is added to relay it breaks the circuit for power to compressor.
+I have also added a 5 volt voltage regulator, I didn´t have an 3,3 but this works fine as long as i power the Wemos board using 5V pin...
 
 
 Video where I am testing status updates in boat:
@@ -182,17 +182,17 @@ https://youtu.be/avVuPIPxaBE
 Using led for testing status is useful for seeing what and when things are happening. At this point it is also useful to play around with some parameters to fully understand what happens: 
 
 ```
-//For smoother rpmEngine_1 values
+//For smoother rpmEngine_1 value
 const int numReadingsRpm_Engine1 = 200;        // How many pulses u calculate rpm average from, i fond that 200 still updates fast enough
 const int numReadingsRpm_Engine1Stat = 100;    // How many rpm u calculate average for statusupdate from
 const int StatusDelay_Engine1 = 5000;         // Set an delay in millis for status to change, this delay avoids compressor for rapidly turning on/off
 
-int correctingRevEngine_1 = 20;             // For eventual correction of output rpm, i found that 20 (2.0%) gives me more acurate readings according to tachometer in boat.
+int correctingRevEngine_1 = 20;             // For eventual correction of output rpm, i found that 20 (2.0%) gives me more accurate readings according to tachometer in boat.
 
 
-// Pulse signal from generator is full og ripples, so by setting max/min pulse allowed code will only read relevant and "clean" pulses.
-int lowestPulseAllowedEngine_1 = 900;      // Lowes pulse allowed - At 3900 rpm pulse is 1047 micros, so shorter pulses are most lightly ripples or an uncorrect pulse
-int highestPulseAllowedEngine_1 = 5800;     // Highest pulse allowed - At 750 rpm pulse is 5442 micros, so longer pulses are most lightly ripples or an uncorrect pulse
+// Pulse signal from generator is full of ripples, so by setting max/min pulse allowed code will only read relevant and "clean" pulses.
+int lowestPulseAllowedEngine_1 = 900;      // Lowes pulse allowed - At 3900 rpm pulse is 1047 micros, so shorter pulses are most lightly ripples or an incorrect pulse
+int highestPulseAllowedEngine_1 = 5800;     // Highest pulse allowed - At 750 rpm pulse is 5442 micros, so longer pulses are most lightly ripples or an incorrect pulse
 
 ```
 
@@ -200,10 +200,13 @@ When you are happy with result, it is time to perform full test:
 
 https://youtu.be/tlZVmXCEPew
 
-After performing full test i found that there is still some adjustments I want to do:
-increasing tolerance for rpm +/- for status since engine changes status when idle and also when Status = 2 (rpm stabile) at 2000 rpm since rpm rises a bit when compressor is disengaging.
-Chsnge some timing issues, I want to try to lower delay for ststus update and and also add to code that compressor does not have to engage if Status = 2 (rpm stabile) and rpm is above 2000. This will avoid compressor to start up just for an second or two.... 
+After performing full test, I found that there is still some adjustments I want to do:
+increasing tolerance for rpm +/- for status since engine changes status when idle and when Status = 2 (rpm stabile) at 2000 rpm since rpm rises a bit when compressor is disengaging.
+Change some timing issues, I want to try to lower delay for status update and add to code that compressor does not have to engage if Status = 2 (rpm stabile) and rpm is above 2000. This will avoid compressor to start up just for a second or two.... 
 
+Final test after changes:
 
-### ATT: This document is not finish....
-i
+https://youtu.be/Tseec64TGQg
+
+Now I am happy, all functions work as intended and I am ready for mounting controller and relays in waterproof box for final installation.
+I will add some pictures when done :-)
